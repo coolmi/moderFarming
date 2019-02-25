@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 // import api from '@/api/api'
 import ding from '@/lib/ding'
-import { Table, TableColumn } from 'element-ui';
+import { Table, TableColumn, Rate } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 import Datetime from 'vux/src/components/datetime/index.vue'
 import DatetimeView from 'vux/src/components/datetime-view/index.vue'
@@ -48,6 +48,7 @@ Vue.component('flexbox-item', FlexboxItem);
 Vue.component('Box', Box);
 Vue.component(Table.name, Table);
 Vue.component(TableColumn.name, TableColumn);
+Vue.component('el-rate', Rate);
 Vue.component('toast', Toast);
 Vue.component('swipeout', Swipeout);
 Vue.component('swipeout-item', SwipeoutItem);
