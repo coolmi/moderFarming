@@ -10,19 +10,15 @@
     <!--全部-->
     <div v-if="selectedIndex === 0 && AllList.length > 0">
         <swipeout>
-          <swipeout-item :threshold=".5" transition-mode="follow" v-for="item in AllList" :key="item.id">
-            <!--<div slot="right-menu">-->
-              <!--<swipeout-button @click.native="editClick(item)" background-color="#336DD6">修改</swipeout-button>-->
-              <!--<swipeout-button @click.native="deleteClick(item)" background-color="#D23934">删除</swipeout-button>-->
-            <!--</div>-->
+          <swipeout-item :threshold=".5" transition-mode="follow" v-for="item in AllList" :key="item.id" class="bor_">
             <div slot="content" class="list-content" @click="eventView(item)">
               <img slot="icon" width="35" height="35" v-if="item.avatar" class="cellImg"
                    :src="item.avatar">
               <div slot="icon" class="cellDiv" v-else>
                 {{item.name}}
               </div>
-              <div>
-                <span>{{item.name + '提出来' + item.event + ',请办理!'}}</span><br>
+              <div class="content_div">
+                <span>{{item.name + '提出来' + item.event + ',请办理!'}}</span>
                 <span>{{item.time}}</span>
               </div>
             </div>
@@ -35,19 +31,15 @@
     <!--进行中-->
     <div v-if="selectedIndex === 1 && IngList.length > 0">
         <swipeout>
-          <swipeout-item :threshold=".5" underlay-color="#ccc" v-for="item in IngList" :key="item.id">
-            <div slot="right-menu">
-              <swipeout-button @click.native="editClick(item)" background-color="#336DD6">修改</swipeout-button>
-              <swipeout-button @click.native="deleteClick(item)" background-color="#D23934">删除</swipeout-button>
-            </div>
+          <swipeout-item :threshold=".5" transition-mode="follow" v-for="item in IngList" :key="item.id" class="bor_">
             <div slot="content" class="list-content" @click="eventView(item)">
               <img slot="icon" width="35" height="35" v-if="item.avatar" class="cellImg"
                    :src="item.avatar">
               <div slot="icon" class="cellDiv" v-else>
                 {{item.name}}
               </div>
-              <div>
-                <span>{{item.name + '提出来' + item.event + ',办理中!'}}</span><br>
+              <div class="content_div">
+                <span>{{item.name + '提出来' + item.event + ',办理中!'}}</span>
                 <span>{{item.time}}</span>
               </div>
             </div>
@@ -60,19 +52,15 @@
     <!--已完成-->
     <div v-if="selectedIndex === 2 && FinishList.length > 0">
         <swipeout>
-          <swipeout-item :threshold=".5" underlay-color="#ccc" v-for="item in FinishList" :key="item.id">
-            <!--<div slot="right-menu">-->
-              <!--<swipeout-button @click.native="editClick(item)" background-color="#336DD6">修改</swipeout-button>-->
-              <!--<swipeout-button @click.native="deleteClick(item)" background-color="#D23934">删除</swipeout-button>-->
-            <!--</div>-->
+          <swipeout-item :threshold=".5" transition-mode="follow" v-for="item in FinishList" :key="item.id" class="bor_">
             <div slot="content" class="list-content" @click="eventView(item)">
               <img slot="icon" width="35" height="35" v-if="item.avatar" class="cellImg"
                    :src="item.avatar">
               <div slot="icon" class="cellDiv" v-else>
                 {{item.name}}
               </div>
-              <div>
-                <span>{{item.name + '提出来' + item.event + ',已完成!'}}</span><br>
+              <div class="content_div">
+                <span>{{item.name + '提出来' + item.event + ',办理完成!'}}</span>
                 <span>{{item.time}}</span>
               </div>
             </div>
@@ -96,19 +84,19 @@
           { name: '已完成' }
         ],
         AllList: [
-          { id: '1', name: '张三', event: 'OA系统登录不上', time: '2019-01-01', type: '0' },
-          { id: '2', name: '李四', event: '资金系统登录不上', time: '2019-01-21', type: '0' },
+          { id: '1', name: '张三1', event: 'OA系统登录不上', time: '2019-01-01', type: '0' },
+          { id: '2', name: '李四1', event: '资金系统登录不上', time: '2019-01-21', type: '0' },
           { id: '3', name: '王五', event: '我的系统登录不上', time: '2019-02-9', type: '0' }
         ],
         IngList: [
-          { id: '4', name: '张三', event: 'OA系统登录不上', time: '2019-01-01', type: '1' },
-          { id: '5', name: '李四', event: '资金系统登录不上', time: '2019-01-21', type: '1' },
-          { id: '6', name: '王五', event: '我的系统登录不上', time: '2019-02-9', type: '1' }
+          { id: '4', name: '张三2', event: 'OA系统登录不上', time: '2019-01-01', type: '1' },
+          { id: '5', name: '李四2', event: '资金系统登录不上', time: '2019-01-21', type: '1' },
+          { id: '6', name: '王五2', event: '我的系统登录不上', time: '2019-02-9', type: '1' }
         ],
         FinishList: [
-          { id: '7', name: '张三', event: 'OA系统登录不上', time: '2019-01-01', type: '2' },
-          { id: '8', name: '李四', event: '资金系统登录不上', time: '2019-01-21', type: '2' },
-          { id: '9', name: '王五', event: '我的系统登录不上', time: '2019-02-9', type: '2' }
+          { id: '7', name: '张三3', event: 'OA系统登录不上', time: '2019-01-01', type: '2' },
+          { id: '8', name: '李四3', event: '资金系统登录不上', time: '2019-01-21', type: '2' },
+          { id: '9', name: '王五3', event: '我的系统登录不上', time: '2019-02-9', type: '2' }
         ]
       }
     },
@@ -155,19 +143,32 @@
 
 <style lang="less" type="text/less">
   .list-content {
+    /*width: 100vw;*/
     height: 60px!important;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding: 0 40px;
     /*border: 1px solid red;*/
   }
   .top_but {
     margin: 10px 5px 0 5px;
   }
+  .content_div {
+    font-size: 15px;
+    width: 90vw;
+    height: 60px;
+    /*line-height: 60px;*/
+    /*border: 1px solid green;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   .cellDiv {
     width: 35px;
-    height: 35px;
-    line-height: 35px;
+    height: 30px;
+    /*width: 10vw;*/
+    line-height: 30px;
     margin-right: 10px;
     font-size: .8rem;
     text-align: center;
@@ -175,38 +176,14 @@
     color: #FFFFFF;
     background-color: #986526;
   }
-
+  .bor_ {
+    border-bottom: 1px solid #E5E5E5!important;
+    margin: 3px 0;
+  }
   .cellImg {
     display: block;
     margin-right: 10px;
     border-radius: 50%;
-  }
-
-  .bottom-load-wrapper {
-    line-height: 50px;
-    text-align: center;
-  }
-
-  .icon-arrow {
-    transition: .2s;
-    transform: rotate(180deg);
-  }
-
-  .icon-loading {
-    transform: rotate(0deg);
-    animation-name: loading;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-  }
-
-  @keyframes loading {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
   }
 
   .emptyDiv {
