@@ -31,49 +31,18 @@ const router = new Router({
   scrollBehavior,
   routes: [
     {
-      path: '/',
+      path: '/Appraise',
       component: () => import('@/views/Home'),
       meta: {
         ddConfig: true
       }
     },
     {
-      path: '/Appraise',
+      path: '/',
       component: () => import('@/views/Appraise'),
       meta: {
         ddConfig: true
       }
-    },
-    {
-      path: '/h',
-      component: () => import('@/views/HomePage'),
-      meta: {
-        ddConfig: true
-      }
-    },
-    {
-      path: '/q',
-      component: () => import('@/views/Query'),
-      children: [
-        {
-          path: '/',
-          name: 'table',
-          component: () => import('@/views/Table')
-        }
-      ]
-    },
-    {
-      path: '/qc',
-      name: 'QueryContent',
-      component: () => import('@/views/QueryContent'),
-      meta: {
-        ddConfig: true
-      }
-    },
-    {
-      path: '/history',
-      name: 'History',
-      component: () => import('@/views/History')
     }
   ]
 });
@@ -107,13 +76,13 @@ let setDocumentTitle = function (title) {
 
 let setDDConfig = function (to) {
   // let path = store.state.ddstate.ddConfigPath || base.baseURL
-  let path = location.href
-  ding.jsApiOAuth(path).then((ddconfig) => {
-    dd.config(ddconfig)
-  }).catch(function (error) {
-    // TODO 错误信息提示
-    // ding.alertInfo(DEM.ddConfigInfoError);
-  });
+  // let path = location.href
+  // ding.jsApiOAuth(path).then((ddconfig) => {
+  //   dd.config(ddconfig)
+  // }).catch(function (error) {
+  //   // TODO 错误信息提示
+  //   // ding.alertInfo(DEM.ddConfigInfoError);
+  // });
 }
 
 export default router;

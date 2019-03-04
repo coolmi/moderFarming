@@ -6,19 +6,13 @@
     <x-textarea :rows="2" placeholder="请输入问题描述" v-model="describes" title="问题描述"></x-textarea>
     <x-textarea :rows="2" placeholder="请输入解决方案" v-model="describes" title="解决方案"></x-textarea>
     <x-input title="业务处理人" v-model="person"></x-input>
-    <cell class="cell_">
-      <div class="span_">评价</div>
-      <el-rate
-        v-model="develop"
-        show-text
-        :texts="meg"
-        :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
-        class="el-rate_sss">
-      </el-rate>
+    <cell title="评价">
+      <rater v-model="develop" :margin="10"></rater>
+      <span class="star_text">{{develop | getName}}</span>
     </cell>
     <x-textarea :rows="2" placeholder="请输入评价内容" v-model="describes" title="评价内容"></x-textarea>
     <x-input title="附件"></x-input>
-    <div style="margin:10px 10px 20px 50px">
+    <div style="margin:5px 20px 10px 90px">
         <checker
           v-model="person"
           default-item-class="demo4-item"
@@ -42,7 +36,7 @@
         time: '',
         describes: '',
         person: '',
-        develop: 5,
+        develop: 2,
         meg: ['非常不满意', '不满意', '基本满意', '满意', '非常满意'],
         Plist: [
           { key: '苹果', value: '苹果' },
@@ -55,6 +49,21 @@
     },
     watch: {},
     created() {
+    },
+    filters: {
+      getName(val) {
+        if (val === 1) {
+          return `非常不满意`;
+        } else if (val === 2) {
+          return `不满意`;
+        } else if (val === 3) {
+          return `基本满意`;
+        } else if (val === 4) {
+          return `满意`;
+        } else if (val === 5) {
+          return `非常满意`;
+        }
+      }
     },
     methods: {
       subInfo () {
@@ -81,28 +90,10 @@
     display: inline-flex;
     width: 180px;
   }
-  .red {
-    color: red;
-  }
-  .span_ {
-    float: left;
-    font-size: 16px;
-    color: #000;
-    margin-right: 100px;
-  }
-  .el-rate__text {
-    font-size: 18px;
-    padding: 10px;
-  }
-  .el-rate_sss {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 44px;
-  }
-  .cell_>.weui-cell__ft{
-    display: flex!important;
-    align-items: center!important;
+  .star_text {
+    width: 5rem;
+    margin: 0 10px;
+    display: inline-flex;
   }
   .demo4-item {
     background-color: pink;
