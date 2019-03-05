@@ -2,8 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-// import ding from '@/lib/ding'
-import api from '@/api/api'
+import ding from '@/lib/ding'
+// import api from '@/api/api'
 import ButtonTab from 'vux/src/components/button-tab/button-tab.vue'
 import ButtonTabItem from 'vux/src/components/button-tab/button-tab-item.vue'
 import Swipeout from 'vux/src/components/swipeout/swipeout.vue'
@@ -37,23 +37,23 @@ Vue.component('toast', Toast);
 
 store.dispatch('saveURL', location.href)
 store.dispatch('saveDingTalkCode')
-  initVue();
-// ding.ddLogin(location.href).then(data => {
-//   // console.log(data);
-//   // alert(1)
-//   initVue()
-// }).catch((err) => {
-//   let dd = window.dd
-//   dd.device.notification.alert({
-//     message: err.msg.errorMessage,
-//     title: '提示',
-//     buttonName: '确定',
-//     onSuccess: function() {
-//       // dd.biz.navigation.close()
-//     },
-//     onFail: function(err) {}
-//   });
-// })
+  // initVue();
+ding.ddLogin(location.href).then(data => {
+  // console.log(data);
+  // alert(1)
+  initVue()
+}).catch((err) => {
+  let dd = window.dd
+  dd.device.notification.alert({
+    message: err.msg.errorMessage,
+    title: '提示',
+    buttonName: '确定',
+    onSuccess: function() {
+      // dd.biz.navigation.close()
+    },
+    onFail: function(err) {}
+  });
+})
 
 Vue.prototype.dd = window.dd;
 

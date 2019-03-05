@@ -9,14 +9,11 @@ export default {
    */
   getJsApiInfos: function (params, cb) {
     let dingtalkCode = ding.parseParam(window.location.href, 'dingtalk_code') || ding.getLocation(AUTH_DINGTALKCODE)
-    alert(params)
-    alert(dingtalkCode)
-    axios.get('/api/ddtalk/miandeng/h5config?purl=' + params + '&dingtalk_code=' + dingtalkCode)
+    axios.get('worktile/api/ddtalk/miandeng/h5config?purl=' + params + '&dingtalk_code=' + dingtalkCode)
       .then((res) => {
         alert(JSON.stringify(res))
         cb(res);
       }).catch((error) => {
-        alert(JSON.stringify(error))
       return Promise.reject(error)
     })
   },
@@ -27,8 +24,11 @@ export default {
    */
   getLogin: function (data, cb) {
     let dingtalkCode = ding.parseParam(window.location.href, 'dingtalk_code') || ding.getLocation(AUTH_DINGTALKCODE)
-    axios.get('/dingding/es/login?code=' + data + '&dingtalk_code=' + dingtalkCode)
+    alert('code' + dingtalkCode)
+    alert(data)
+    axios.get('worktile/dingding/pm/login?code=' + data + '&dingtalk_code=' + dingtalkCode)
       .then((res) => {
+        alert(JSON.stringify(res))
         cb(res);
       }).catch((error) => {
       return Promise.reject(error)
@@ -41,14 +41,6 @@ export default {
    */
   getLogout: function (cb) {
     axios.get('/app/logout')
-      .then((res) => {
-        cb(res)
-      }).catch((error) => {
-      return Promise.reject(error)
-    })
-  },
-  getceshi: function (cb) {
-    axios.get('/pm/omvaluate/list')
       .then((res) => {
         cb(res)
       }).catch((error) => {
@@ -88,6 +80,22 @@ export default {
       .then(res => {
         cb(res)
       }).catch(error => {
+      return Promise.reject(error)
+    })
+  },
+  // 附件查看
+  getDocument: function (url, cb) {
+    axios.get(url).then((res) => {
+      cb(res);
+    }).catch((error) => {
+      return Promise.reject(error)
+    })
+  },
+  getpomlist: function (cb) {
+    axios.get('worktile/pm/opermaint/pomlist')
+      .then((res) => {
+        cb(res)
+      }).catch((error) => {
       return Promise.reject(error)
     })
   }

@@ -66,10 +66,10 @@ export function ddLogin(path) {
     }
     getRequestAuthCode(path).then(data => {
       api.getLogin(data, function (res) {
-        alert(JSON.stringify(res))
-        if (res.data.code) {
+        if (res.data.code === '200') {
           resolve(true)
         } else {
+          alert('免登失败')
           reject(new FlowError('钉钉免登失败'))
         }
       })
@@ -92,8 +92,6 @@ export function getRequestAuthCode(path) {
           onFail: function (err) {
             store.dispatch('updateCode', false)
             reject(new FlowError('获取免登陆码失败'))
-            // window.alert('dd ding error: ' + window.location.href + JSON.stringify(err));
-            // whole.showTop(dingEM.ddRequestAuthCodeError)
           }
         })
       })
@@ -189,6 +187,19 @@ export function showToast(mes = '成功', icon = 'success') {
 export function hidePreloader() {
   dd.device.notification.hidePreloader()
 }
+export function alertInfo(mes, title = '提示', btnName = '确定') {
+  dd.ready(function () {
+    dd.device.notification.alert({
+      message: mes,
+      title: title,
+      buttonName: btnName,
+      onSuccess: function () {
+      },
+      onFail: function (err) {
+      }
+    });
+  });
+}
 
 export default {
   CORPID,
@@ -217,6 +228,7 @@ export default {
   confirm,
   showPreloader,
   hidePreloader,
+  alertInfo,
   showToast,
   getJSApiList
 }

@@ -32,6 +32,10 @@
     <div v-if="selectedIndex === 1 && IngList.length > 0">
         <swipeout>
           <swipeout-item :threshold=".5" transition-mode="follow" v-for="item in IngList" :key="item.id" class="bor_">
+            <div slot="right-menu">
+              <swipeout-button @click.native="editClick(item)" background-color="#336DD6"></swipeout-button>
+              <swipeout-button @click.native="deleteClick(item)" background-color="#D23934"></swipeout-button>
+            </div>
             <div slot="content" class="list-content" @click="eventView(item)">
               <img slot="icon" width="35" height="35" v-if="item.avatar" class="cellImg"
                    :src="item.avatar">
@@ -74,6 +78,7 @@
 </template>
 
 <script>
+  import api from '@/api/api'
   export default {
     data() {
       return {
@@ -104,6 +109,8 @@
     },
     watch: {},
     created() {
+      api.getpomlist(function (res) {
+      })
     },
     methods: {
       tabItemClick(index) {
