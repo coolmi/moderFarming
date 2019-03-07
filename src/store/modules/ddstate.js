@@ -11,7 +11,7 @@ export default {
   state: {
     ddConfig: localStorage.getItem(AUTH_DDCONFIG) || null,
     ddConfigStatus: null,
-    ddConfigCode: null,
+    ddConfigCode: '',
     ddUserID: '',
     ddConfigPath: '' || base.baseURL,
     ddAddress: '',

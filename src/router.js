@@ -1,8 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import ding from '@/lib/ding'
-// import store from '@/store'
-// import base from '@/api/baseConfig'
+import ding from './lib/ding'
 
 Vue.use(Router);
 
@@ -30,17 +28,17 @@ const router = new Router({
   scrollBehavior,
   routes: [
     {
-      path: '/',
+      path: '/s',
       component: () => import('@/views/Home'),
       meta: {
         ddConfig: true
       }
     },
     {
-      path: '/Appraise',
+      path: '/',
       component: () => import('@/views/Appraise'),
       meta: {
-        ddConfig: true
+        // ddConfig: true
       }
     }
   ]

@@ -55,9 +55,9 @@ const dingApiConfig = {
   'biz.util.decrypt': false,
   'runtime.permission.requestOperateAuthCode': false,
   'biz.util.scanCard': false,
-  'util.domainStorage.getItem': false,
-  'util.domainStorage.setItem': false,
-  'util.domainStorage.removeItem': false
+  'util.domainStorage.getItem': true,
+  'util.domainStorage.setItem': true,
+  'util.domainStorage.removeItem': true
 }
 
 export default dingApiConfig

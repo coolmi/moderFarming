@@ -7,34 +7,12 @@
         </button-tab-item>
       </button-tab>
     </div>
-    <!--全部-->
-    <div v-if="selectedIndex === 0 && AllList.length > 0">
+    <!--未评价-->
+    <div v-if="selectedIndex === 0 && unfinishList.length > 0">
         <swipeout>
-          <swipeout-item :threshold=".5" transition-mode="follow" v-for="item in AllList" :key="item.id" class="bor_">
-            <div slot="content" class="list-content" @click="eventView(item)">
-              <img slot="icon" width="35" height="35" v-if="item.avatar" class="cellImg"
-                   :src="item.avatar">
-              <div slot="icon" class="cellDiv" v-else>
-                {{item.name}}
-              </div>
-              <div class="content_div">
-                <span>{{item.name + '提出来' + item.event + ',请办理!'}}</span>
-                <span>{{item.time}}</span>
-              </div>
-            </div>
-          </swipeout-item>
-        </swipeout>
-    </div>
-    <div v-if="selectedIndex === 0 && AllList.length < 0" class="emptyDiv">
-      <img src="/static/image/zwsj.png">
-    </div>
-    <!--进行中-->
-    <div v-if="selectedIndex === 1 && IngList.length > 0">
-        <swipeout>
-          <swipeout-item :threshold=".5" transition-mode="follow" v-for="item in IngList" :key="item.id" class="bor_">
+          <swipeout-item :threshold=".5" transition-mode="follow" v-for="item in unfinishList" :key="item.id" class="bor_">
             <div slot="right-menu">
-              <swipeout-button @click.native="editClick(item)" background-color="#336DD6"></swipeout-button>
-              <swipeout-button @click.native="deleteClick(item)" background-color="#D23934"></swipeout-button>
+              <swipeout-button @click.native="editClick(item)" background-color="#336DD6">修改</swipeout-button>
             </div>
             <div slot="content" class="list-content" @click="eventView(item)">
               <img slot="icon" width="35" height="35" v-if="item.avatar" class="cellImg"
@@ -43,20 +21,20 @@
                 {{item.name}}
               </div>
               <div class="content_div">
-                <span>{{item.name + '提出来' + item.event + ',办理中!'}}</span>
+                <span>{{item.name + '提出来' + item.event + ',请及时评价!'}}</span>
                 <span>{{item.time}}</span>
               </div>
             </div>
           </swipeout-item>
         </swipeout>
     </div>
-    <div v-if="selectedIndex === 1 && IngList.length < 0" class="emptyDiv">
+    <div v-else class="emptyDiv">
       <img src="/static/image/zwsj.png">
     </div>
-    <!--已完成-->
-    <div v-if="selectedIndex === 2 && FinishList.length > 0">
+    <!--已评价-->
+    <div v-if="selectedIndex === 1 && finishList.length > 0">
         <swipeout>
-          <swipeout-item :threshold=".5" transition-mode="follow" v-for="item in FinishList" :key="item.id" class="bor_">
+          <swipeout-item :threshold=".5" transition-mode="follow" v-for="item in finishList" :key="item.id" class="bor_">
             <div slot="content" class="list-content" @click="eventView(item)">
               <img slot="icon" width="35" height="35" v-if="item.avatar" class="cellImg"
                    :src="item.avatar">
@@ -64,14 +42,14 @@
                 {{item.name}}
               </div>
               <div class="content_div">
-                <span>{{item.name + '提出来' + item.event + ',办理完成!'}}</span>
+                <span>{{item.name + '提出来' + item.event + ',评价完成!'}}</span>
                 <span>{{item.time}}</span>
               </div>
             </div>
           </swipeout-item>
         </swipeout>
     </div>
-    <div v-if="selectedIndex === 2 && FinishList.length < 0" class="emptyDiv">
+    <div v-if="selectedIndex === 1 && finishList.length < 0" class="emptyDiv">
       <img src="/static/image/zwsj.png">
     </div>
   </div>
@@ -84,25 +62,11 @@
       return {
         selectedIndex: 0,
         tabList: [
-          { name: '全部' },
-          { name: '进行中' },
-          { name: '已完成' }
+          { name: '未评价' },
+          { name: '已评价' }
         ],
-        AllList: [
-          { id: '1', name: '张三1', event: 'OA系统登录不上', time: '2019-01-01', type: '0' },
-          { id: '2', name: '李四1', event: '资金系统登录不上', time: '2019-01-21', type: '0' },
-          { id: '3', name: '王五', event: '我的系统登录不上', time: '2019-02-9', type: '0' }
-        ],
-        IngList: [
-          { id: '4', name: '张三2', event: 'OA系统登录不上', time: '2019-01-01', type: '1' },
-          { id: '5', name: '李四2', event: '资金系统登录不上', time: '2019-01-21', type: '1' },
-          { id: '6', name: '王五2', event: '我的系统登录不上', time: '2019-02-9', type: '1' }
-        ],
-        FinishList: [
-          { id: '7', name: '张三3', event: 'OA系统登录不上', time: '2019-01-01', type: '2' },
-          { id: '8', name: '李四3', event: '资金系统登录不上', time: '2019-01-21', type: '2' },
-          { id: '9', name: '王五3', event: '我的系统登录不上', time: '2019-02-9', type: '2' }
-        ]
+        unfinishList: [],
+        finishList: []
       }
     },
     computed: {
@@ -110,6 +74,7 @@
     watch: {},
     created() {
       api.getpomlist(function (res) {
+        console.log(res)
       })
     },
     methods: {
