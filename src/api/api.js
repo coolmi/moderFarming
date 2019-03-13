@@ -106,7 +106,6 @@ export default {
   getProjectInfo: function (pomid, cb) {
     axios.get('worktile/api/opermaint/pomlist?pomid=' + pomid)
       .then((res) => {
-        console.log(res)
         cb(res)
       }).catch((error) => {
       return Promise.reject(error)

@@ -1,16 +1,13 @@
 <template>
   <group label-width="5em" label-align="left" label-margin-right="3em">
-    <x-textarea :rows="2" placeholder="请输入简述" v-model="project.qstitle" title="简述"></x-textarea>
-    <x-textarea :rows="2" placeholder="请输入问题描述" v-model="project.pbdesc" title="问题描述"></x-textarea>
-    <x-textarea :rows="2" placeholder="请输入解决方案" v-model="project.solution" title="解决方案"></x-textarea>
+    <x-textarea :rows="2" placeholder="请输入简述" v-model="project.qstitle" title="简述" :max="50" :disabled="true"></x-textarea>
+    <x-textarea :rows="2" placeholder="请输入问题描述" v-model="project.pbdesc" title="问题描述" :max="50" :disabled="true"></x-textarea>
+    <x-textarea :rows="2" placeholder="请输入解决方案" v-model="project.solution" title="解决方案" :max="200" :disabled="true"></x-textarea>
     <x-input title="业务处理人" v-model="project.createby" text-align="left" :disabled="true"></x-input>
     <x-input title="附件"></x-input>
     <div style="margin:0 20px 10px 65px" v-if="project.fileList.length > 0">
       <checker
-        default-item-class="demo4-item"
-        selected-item-class="demo4-item-selected"
-        disabled-item-class="demo4-item-disabled"
-      >
+        default-item-class="demo4-item">
         <checker-item v-for="(val,index) in project.fileList" :key="index" @on-item-click="onItemClick(val)" v-model="val.name">{{val.name}}</checker-item>
       </checker>
     </div>
@@ -22,11 +19,11 @@
       <rater class="ra_ra" v-model="mark" :margin="10"></rater>
       <span class="star_text">{{mark | getName}}</span>
     </div>
-    <x-textarea :rows="2" placeholder="请输入评价内容" v-model="project.valuation" title="评价内容"></x-textarea>
+    <x-textarea :rows="1" placeholder="请输入评价内容" v-model="project.valuation" title="评价内容" :max="50"></x-textarea>
     <box gap="40px 30px">
       <x-button text="提交" @click.native="subInfo" :gradients="['#1D62F0', '#19D5FD']" style="margin:10px 0 30px 0"></x-button>
     </box>
-    <toast v-model="showmeg" type="text" :time="500" is-show-mask text="提交成功!" position="middle"></toast>
+    <toast v-model="showmeg" type="text" :time="1500" is-show-mask text="提交成功!" position="middle"></toast>
   </group>
 </template>
 
@@ -47,7 +44,7 @@
           createdate: '',
           fileList: []
         },
-        mark: '5',
+        mark: 5,
         showmeg: false,
         fujianVal: '暂无附件!'
       }
@@ -60,11 +57,30 @@
     watch: {},
     created() {
       let _that = this;
+      let dd = window.dd;
       if (window.location.toString().indexOf('?') > 0) {
         let pomidurl = window.location.toString().substr(window.location.toString().indexOf('?') + 1);
         let pomid = pomidurl.substr(pomidurl.indexOf('=') + 1);
         api.getProjectInfo(pomid, function (res) {
           console.log(res);
+          if (res.data.pomlist.length === 0) {
+            dd.device.notification.alert({
+              message: '当前任务未完成，还不能评价！',
+              title: '提示', // 可传空
+              buttonName: '好',
+              onSuccess: function() {
+                setTimeout(() => {
+                  dd.biz.navigation.close({
+                    onSuccess: function(result) {
+                    },
+                    onFail: function(err) {}
+                  })
+                }, 500);
+                return;
+              },
+              onFail: function(err) {}
+            });
+          }
           if (res.data.pomlist.length > 0) {
             _that.project = res.data.pomlist[0];
             if (res.data.pomlist[0].fileList.length > 0) {
@@ -101,7 +117,7 @@
         let params = {
           itcode: _that.itcode,
           pomid: _that.project.id,
-          mark: _that.project.mark,
+          mark: _that.mark,
           valuation: _that.project.valuation,
           createby: _that.project.createby
         }
@@ -109,6 +125,14 @@
           console.log(res)
           if (res.data.msg === 'success') {
             _that.showmeg = true
+            setTimeout(() => {
+              let dd = window.dd;
+              dd.biz.navigation.close({
+                onSuccess: function(result) {
+                },
+                onFail: function(err) {}
+              })
+            }, 500);
           }
         })
       },
@@ -146,15 +170,7 @@
     border-radius: 15px;
     margin: 5px 10px 5px 0;
   }
-  .weui-textarea {
-   color: rgb(175, 176, 179)!important;
-  }
-  .demo4-item-selected {
-    /*background-color: pink;*/
-    /*color: #fff;*/
-  }
-  .demo4-item-disabled {
-    /*background-color: pink;*/
-    /*color: deepskyblue;*/
-  }
+  /*.weui-textarea {*/
+   /*color: rgb(132, 132, 132)!important;*/
+  /*}*/
 </style>

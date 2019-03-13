@@ -66,7 +66,7 @@ export function getItcode() {
         onSuccess: function (result) {
           api.getItcodeInfo(result.code, function (res) {
             store.dispatch('updateCode', res.data.data)
-            resolve(res.data)
+            resolve(res.data.data)
           })
         },
         onFail: function (err) {
