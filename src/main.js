@@ -40,7 +40,9 @@ Vue.component('group', Group);
 store.dispatch('saveURL', location.href)
 store.dispatch('saveDingTalkCode')
   // initVue();
-ding.getItcode().then(data => {
+ding.ddLogin(location.href).then(data => {
+  // console.log(data);
+  // alert(1)
   initVue()
 }).catch((err) => {
   let dd = window.dd

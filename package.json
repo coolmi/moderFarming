@@ -1,5 +1,5 @@
 {
-  "name": "gdzc",
+  "name": "ddxdyz",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -34,19 +34,5 @@
     "vue-loader": "^14.2.2",
     "vue-template-compiler": "^2.5.17",
     "webpack-bundle-analyzer": "^3.0.3"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
-  "main": ".eslintrc.js",
-  "repository": {
-    "type": "git",
-    "url": "git@git.gmkholdings.com:yuemin1.zhang/projectManage.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  }
 }

@@ -9,22 +9,12 @@ export default {
    */
   getJsApiInfos: function (params, cb) {
     let dingtalkCode = ding.parseParam(window.location.href, 'dingtalk_code') || ding.getLocation(AUTH_DINGTALKCODE)
-    axios.get('worktile/api/ddtalk/miandeng/h5config?purl=' + params + '&dingtalk_code=' + dingtalkCode)
+    axios.get('/api/ddtalk/miandeng/h5config?purl=' + params + '&dingtalk_code=' + dingtalkCode)
       .then((res) => {
+        alert(JSON.stringify(res))
         cb(res);
       }).catch((error) => {
-      return Promise.reject(error)
-    })
-  },
-  /**
-   * 获取Itcode参数
-   * @param cb
-   */
-  getItcodeInfo: function (code, cb) {
-    axios.get('worktile/api/ddtalk/miandeng/userid?code=' + code)
-      .then((res) => {
-        cb(res);
-      }).catch((error) => {
+      alert(JSON.stringify(error))
       return Promise.reject(error)
     })
   },
@@ -34,25 +24,14 @@ export default {
    * @param cb
    */
   getLogin: function (data, cb) {
-    axios.post('worktile/dingding/pm/login?code=' + data)
+    let dingtalkCode = ding.parseParam(window.location.href, 'dingtalk_code') || ding.getLocation(AUTH_DINGTALKCODE)
+    axios.get('/dingding/es/login?code=' + data + '&dingtalk_code=' + dingtalkCode)
       .then((res) => {
         cb(res);
       }).catch((error) => {
       return Promise.reject(error)
     })
   },
-  // getLogin: function (data, cb) {
-  //   let dingtalkCode = ding.parseParam(window.location.href, 'dingtalk_code') || ding.getLocation(AUTH_DINGTALKCODE)
-  //   alert('code' + dingtalkCode)
-  //   alert(data)
-  //   axios.get('worktile/dingding/pm/login?code=' + data + '&dingtalk_code=' + dingtalkCode)
-  //     .then((res) => {
-  //       alert(JSON.stringify(res))
-  //       cb(res);
-  //     }).catch((error) => {
-  //     return Promise.reject(error)
-  //   })
-  // }
   /**
    * 登出
    * @param params
@@ -60,6 +39,14 @@ export default {
    */
   getLogout: function (cb) {
     axios.get('/app/logout')
+      .then((res) => {
+        cb(res)
+      }).catch((error) => {
+      return Promise.reject(error)
+    })
+  },
+  getceshi: function (cb) {
+    axios.post('/breed/api/v1/weather/myweather')
       .then((res) => {
         cb(res)
       }).catch((error) => {
@@ -99,33 +86,6 @@ export default {
       .then(res => {
         cb(res)
       }).catch(error => {
-      return Promise.reject(error)
-    })
-  },
-  // 通过pomid获取问题详情
-  getProjectInfo: function (pomid, cb) {
-    axios.get('worktile/api/opermaint/pomlist?pomid=' + pomid)
-      .then((res) => {
-        cb(res)
-      }).catch((error) => {
-      return Promise.reject(error)
-    })
-  },
-  // 获取附件,附件查看
-  getFileds: function (fileid, cb) {
-    axios.get(fileid).then((res) => {
-      cb(res);
-    }).catch((error) => {
-      return Promise.reject(error)
-    })
-  },
-  // 提交评价详情
-  commitProjectInfo: function (params, cb) {
-    console.log(params);
-    axios.post('worktile/api/opermaint/saveorupdate', params)
-      .then((res) => {
-        cb(res)
-      }).catch((error) => {
       return Promise.reject(error)
     })
   }

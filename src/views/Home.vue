@@ -29,7 +29,7 @@
         </swipeout>
     </div>
     <div v-else class="emptyDiv">
-      <img src="/static/image/zwsj.png">
+      <img src="/src/assets/images/zwsj.png">
     </div>
     <!--已评价-->
     <div v-if="selectedIndex === 1 && finishList.length > 0">
@@ -50,7 +50,7 @@
         </swipeout>
     </div>
     <div v-if="selectedIndex === 1 && finishList.length < 0" class="emptyDiv">
-      <img src="/static/image/zwsj.png">
+      <img src="/src/assets/images/zwsj.png">
     </div>
   </div>
 </template>
