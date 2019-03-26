@@ -4,7 +4,7 @@
  */
 const baseConfig = {
   // baseURL: 'https://dingtalk.gmkholdings.com'
-  baseURL: 'http://10.5.1.253:9002'
+  baseURL: 'http://10.5.1.253:10090'
 }
 
 export default baseConfig

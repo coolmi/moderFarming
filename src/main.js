@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import ding from '@/lib/ding'
+// import ding from '@/lib/ding'
 // import api from '@/api/api'
 import ButtonTab from 'vux/src/components/button-tab/button-tab.vue'
 import ButtonTabItem from 'vux/src/components/button-tab/button-tab-item.vue'
@@ -19,6 +19,7 @@ import Box from 'vux/src/components/box/index.vue'
 import Rater from 'vux/src/components/rater/index.vue'
 import Toast from 'vux/src/components/toast/index.vue'
 import Group from 'vux/src/components/group/index.vue'
+import Tab from 'vux/src/components/tab/tab.vue'
 
 Vue.config.productionTip = false
 Vue.component('button-tab', ButtonTab);
@@ -36,26 +37,27 @@ Vue.component('x-input', XInput);
 Vue.component('Box', Box);
 Vue.component('toast', Toast);
 Vue.component('group', Group);
+Vue.component('tab', Tab);
 
 store.dispatch('saveURL', location.href)
 store.dispatch('saveDingTalkCode')
-  // initVue();
-ding.ddLogin(location.href).then(data => {
-  // console.log(data);
-  // alert(1)
-  initVue()
-}).catch((err) => {
-  let dd = window.dd
-  dd.device.notification.alert({
-    message: err.msg.errorMessage,
-    title: '提示',
-    buttonName: '确定',
-    onSuccess: function() {
-      // dd.biz.navigation.close()
-    },
-    onFail: function(err) {}
-  });
-})
+  initVue();
+// ding.ddLogin(location.href).then(data => {
+//   // console.log(data);
+//   // alert(1)
+//   initVue()
+// }).catch((err) => {
+//   let dd = window.dd
+//   dd.device.notification.alert({
+//     message: err.msg.errorMessage,
+//     title: '提示',
+//     buttonName: '确定',
+//     onSuccess: function() {
+//       // dd.biz.navigation.close()
+//     },
+//     onFail: function(err) {}
+//   });
+// })
 
 Vue.prototype.dd = window.dd;
 

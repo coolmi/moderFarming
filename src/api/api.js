@@ -11,10 +11,8 @@ export default {
     let dingtalkCode = ding.parseParam(window.location.href, 'dingtalk_code') || ding.getLocation(AUTH_DINGTALKCODE)
     axios.get('/api/ddtalk/miandeng/h5config?purl=' + params + '&dingtalk_code=' + dingtalkCode)
       .then((res) => {
-        alert(JSON.stringify(res))
         cb(res);
       }).catch((error) => {
-      alert(JSON.stringify(error))
       return Promise.reject(error)
     })
   },
@@ -45,7 +43,11 @@ export default {
       return Promise.reject(error)
     })
   },
-  getceshi: function (cb) {
+  /**
+   * 获取天气情况
+   * @param cb
+   */
+  getWeatherInfo: function (params, cb) {
     axios.post('/breed/api/v1/weather/myweather')
       .then((res) => {
         cb(res)
