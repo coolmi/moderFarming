@@ -28,8 +28,15 @@ const router = new Router({
   scrollBehavior,
   routes: [
     {
-      path: '/',
+      path: '/dd',
       component: () => import('@/views/weather'),
+      meta: {
+        // ddConfig: true
+      }
+    },
+    {
+      path: '/',
+      component: () => import('@/views/table'),
       meta: {
         // ddConfig: true
       }

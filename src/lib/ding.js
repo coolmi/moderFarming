@@ -29,7 +29,7 @@ const localStorage = global.localStorage;
 let dd = window.dd;
 
 export function getLocation(key) {
-  return localStorage.getItem(key) || 'XMGL';
+  return localStorage.getItem(key) || 'XDHYZ';
 }
 
 export function getItemInLocation() {
@@ -66,7 +66,6 @@ export function ddLogin(path) {
     }
     getRequestAuthCode(path).then(data => {
       api.getLogin(data, function (res) {
-        alert(JSON.stringify(res))
         if (res.data.code) {
           resolve(true)
         } else {

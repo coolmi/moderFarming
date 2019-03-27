@@ -9,7 +9,7 @@ export default {
    */
   getJsApiInfos: function (params, cb) {
     let dingtalkCode = ding.parseParam(window.location.href, 'dingtalk_code') || ding.getLocation(AUTH_DINGTALKCODE)
-    axios.get('/api/ddtalk/miandeng/h5config?purl=' + params + '&dingtalk_code=' + dingtalkCode)
+    axios.get('/breed/api/ddtalk/miandeng/h5config?purl=' + params + '&dingtalk_code=' + dingtalkCode)
       .then((res) => {
         cb(res);
       }).catch((error) => {
@@ -23,7 +23,7 @@ export default {
    */
   getLogin: function (data, cb) {
     let dingtalkCode = ding.parseParam(window.location.href, 'dingtalk_code') || ding.getLocation(AUTH_DINGTALKCODE)
-    axios.get('/dingding/es/login?code=' + data + '&dingtalk_code=' + dingtalkCode)
+    axios.post('/breed/dingding/pm/login?code=' + data + '&dingtalk_code=' + dingtalkCode)
       .then((res) => {
         cb(res);
       }).catch((error) => {
@@ -37,18 +37,6 @@ export default {
    */
   getLogout: function (cb) {
     axios.get('/app/logout')
-      .then((res) => {
-        cb(res)
-      }).catch((error) => {
-      return Promise.reject(error)
-    })
-  },
-  /**
-   * 获取天气情况
-   * @param cb
-   */
-  getWeatherInfo: function (params, cb) {
-    axios.post('/breed/api/v1/weather/myweather')
       .then((res) => {
         cb(res)
       }).catch((error) => {
@@ -70,25 +58,27 @@ export default {
     })
   },
   /**
-   * 获取登录
-   * @param params
+   * 获取天气情况
    * @param cb
    */
-  getUserInfos: function (cb) {
-    axios.get('/dingding/pm/info')
+  getWeatherInfo: function (params, cb) {
+    axios.post('/breed/api/v1/weather/myweather')
       .then((res) => {
-        cb(res);
+        cb(res)
       }).catch((error) => {
       return Promise.reject(error)
     })
   },
-  // 通过钉钉id获取用户itcode
-  getUserInfoDdid: function (params, cb) {
-    axios.get('/authapi/newleave/getUserInfoByDdid' + '?ddid=' + params)
-      .then(res => {
+  /**
+   * 获取环控数据
+   * @param cb
+   */
+  getFarmData: function (params, cb) {
+    axios.post('/breed/api/v1/ac2000/getFarmData', params)
+      .then((res) => {
         cb(res)
-      }).catch(error => {
+      }).catch((error) => {
       return Promise.reject(error)
     })
-  }
+  },
 }
